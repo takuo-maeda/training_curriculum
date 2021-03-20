@@ -30,9 +30,13 @@ class CalendarsController < ApplicationController
     @week_days = []
 
     plans = Plan.where(date: @todays_date..@todays_date + 6)
+
     # Rubyの範囲指定子..と...
     # A..B（B含む）
     # A...B(B含まない)
+    # 与えられた条件にマッチするレコードをすべて返す。
+    # 範囲オブジェクトを作成するには「..」演算子を使用します。
+
 
     7.times do |x|
       today_plans = []
@@ -40,11 +44,13 @@ class CalendarsController < ApplicationController
         today_plans.push(plan.plan) if plan.date == @todays_date + x
         #配列追加メソッドpush today_plansにプランを追加
       end
+
       wday_num = Date.today.wday
       days = { month: (@todays_date + x).month, date: (@todays_date + x).day, plans: today_plans, wday: wdays[(@todays_date +x).wday]}
         #monthメソッド 時間や日付を取得しその月だけ取り出す
         #day 時間や日付を取得しその月だけ取り出す
         #s設定したw aysの配列を使って、timesで作った日の曜日番号取得して表示させる
+
       @week_days.push(days)
     end
   end
