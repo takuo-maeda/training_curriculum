@@ -40,9 +40,11 @@ class CalendarsController < ApplicationController
         today_plans.push(plan.plan) if plan.date == @todays_date + x
         #配列追加メソッドpush today_plansにプランを追加
       end
-      days = { month: (@todays_date + x).month, date: (@todays_date + x).day, plans: today_plans}
-        #monthメソッド　時間や日付を取得しその月だけ取り出す
+      wday_num = Date.today.wday
+      days = { month: (@todays_date + x).month, date: (@todays_date + x).day, plans: today_plans, wday: wdays[(@todays_date +x).wday]}
+        #monthメソッド 時間や日付を取得しその月だけ取り出す
         #day 時間や日付を取得しその月だけ取り出す
+        #s設定したw aysの配列を使って、timesで作った日の曜日番号取得して表示させる
       @week_days.push(days)
     end
   end
